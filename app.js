@@ -33,18 +33,21 @@ class AlertJS {
         dialog.appendChild(this.#buildDialogBody());
         dialog.appendChild(document.createElement("HR"));
         dialog.appendChild(this.#buildDialogFooter());
+        dialog.classList.add("alert-dialog");
         return dialog;
     }
     #buildDialogHeader() {
         const header = document.createElement("DIV");
         header.textContent = this.title;
         this.#headerEl = header;
+        header.classList.add("alert-header");
         return header;
     }
     #buildDialogBody() {
         const body = document.createElement("DIV");
         body.textContent = this.body;
         this.#bodyEl = body;
+        body.classList.add("alert-body");
         return body;
     }
     #buildDialogFooter() {
@@ -52,6 +55,7 @@ class AlertJS {
         footer.textContent = this.footer;
         footer.addEventListener("click", () => this.dialog.close());
         this.#footerEl = footer;
+        footer.classList.add("alert-footer");
         return footer;
     }
     /**
