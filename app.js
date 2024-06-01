@@ -56,6 +56,7 @@ class AlertJS {
         footer.addEventListener("click", () => this.dialog.close());
         this.#footerEl = footer;
         footer.classList.add("alert-footer");
+        footer.autofocus = true;
         return footer;
     }
     /**
@@ -63,17 +64,30 @@ class AlertJS {
      * @param {boolean} bootstrap If you are using bootstrap, you can set this to true to make use of bootstrap's style 
      */
     #customizeDialog(bootstrap) {
-        switch(this.kind.toLowerCase()) {
-            case 'primary':
-                bootstrap ? this.dialog.classList.add("bg-primary", "text-light", "rounded", "border", "border-dark") : false;
-                bootstrap ? this.#footerEl.classList.add("btn", "btn-light") : false;
+        switch (this.kind.toLowerCase()) {
+            case "primary":
+                this.#setDialogAsPrimary(bootstrap);
                 break;
-            case 'dark':
-                bootstrap ? this.dialog.classList.add("bg-dark", "text-light", "rounded", "border", "border-dark") : false;
-                bootstrap ? this.#footerEl.classList.add("btn", "btn-info") : false;
+            case "dark":
+                this.#setDialogAsDark(bootstrap);
+                break;
+            case "danger":
+                this.#setDialogAsDanger(bootstrap);
                 break;
             case "default":
                 return;
         }
+    }
+    #setDialogAsDanger(bootstrap) {
+        bootstrap ? this.dialog.classList.add("bg-danger", "text-light", "rounded", "border", "border-dark") : false;
+        bootstrap ? this.#footerEl.classList.add("btn", "btn-secondary") : false;
+    }
+    #setDialogAsPrimary(bootstrap) {
+        bootstrap ? this.dialog.classList.add("bg-primary", "text-light", "rounded", "border", "border-dark") : false;
+        bootstrap ? this.#footerEl.classList.add("btn", "btn-light") : false;
+    }
+    #setDialogAsDark(bootstrap) {
+        bootstrap ? this.dialog.classList.add("bg-dark", "text-light", "rounded", "border", "border-dark") : false;
+        bootstrap ? this.#footerEl.classList.add("btn", "btn-info") : false;
     }
 }
